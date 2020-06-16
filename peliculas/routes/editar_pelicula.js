@@ -11,7 +11,7 @@ router.get('/:id_pelicula', function(req, res, next) {
   });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/id_pelicula',function (req, res, next) => {
   var nombre = req.body.nombre;
   var url = req.body.imagen;
   var poder = req.body.poder;
@@ -22,8 +22,8 @@ router.post('/', (req, res, next) => {
         poderes: poder
       }
   );
-  miComic.save((err, data) => {
-    if (err) res.send('Error al guardar los datos');
+  miComic.save((error, data) => {
+    if (error) res.send('Error al guardar los datos');
     else res.render('index', data);
   });
 });
