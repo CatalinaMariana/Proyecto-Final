@@ -8,15 +8,13 @@ router.get('/', function(req, res, next) {
 
 
 //POST
-router.post('/cargar_pelicula', (req, res, next) => {
+router.post('/', (req, res, next) => {
  var pelicula = Pelicula({
-   name: req.body.name,
-   year: req.body.year,
-   gender:req.body.gender,
-   director:req.body.director
-   producer:req.body.producer,
-   url:req.body.url
-
+   id:  req.body.id,
+   name:  req.body.name,
+   age: req.body.ag,
+   director: req.body.director,
+   gender: req.body.genero
  });
  pelicula.save( (error,data) => {
    if (error) res.status(404).json({mensaje:'No se guardo correctamente'})
@@ -25,16 +23,16 @@ router.post('/cargar_pelicula', (req, res, next) => {
   //
 });
 
-router.post('/cargar_pelicula', (req, res, next) => {
+router.post('/:peliculaId', (req, res, next) => {
   res.status(404).json({mensaje:"Esta operación no está permitida"});
 });
 
-router.delete('/cargar_pelicula', (req, res, next) => {
+router.delete('/', (req, res, next) => {
   res.status(405).json({mensaje:"Esta accion no está permitida"});
 });
 
-router.delete('/cargar_pelicula', (req, res, next)=>{
-  Pelicula.findOneAndDelete({'_id':req.params.cargar_pelicula}, (error, data)=>{
+router.delete('/:peliculaId', (req, res, next)=>{
+  Pelicula.findOneAndDelete({_id:req.params.peliculaId}, (error, data)=>{
     if(error) res.status(404).json(error);
     else res.status(200).json(data);
     });
