@@ -3,8 +3,6 @@ var router = express.Router();
 var request = require('request');
 var Pelicula = require('../models/Film');
 
-
-/* GET home page. */
 router.get('/:id_pelicula', function(req, res, next) {
   var url = req.protocol + '://' + req.get('host') + '/peliculas/' + req.params.id_pelicula;
   request(url, (error, response, body) => {

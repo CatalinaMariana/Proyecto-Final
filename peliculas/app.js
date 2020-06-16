@@ -14,7 +14,7 @@ var nuevaPeliculaRouter = require('./routes/nueva_pelicula');
 var app = express();
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://MarianaAlvarez:Catalina1227@cluster0-g3r88.mongodb.net/peliculas?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://sisinfo2020:sisinfo.2020@cluster0-frd8n.mongodb.net/peliculas?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false

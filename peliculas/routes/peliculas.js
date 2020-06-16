@@ -21,4 +21,8 @@ router.get('/:id_pelicula', (req, res, next) => {
   });
 });
 
+router.post('/:id_pelicula', (req, res, next) => {
+  res.status(404).json({mensaje: 'No está permitida la acción'});
+});
+
 module.exports = router;
