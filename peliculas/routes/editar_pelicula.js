@@ -10,22 +10,22 @@ router.get('/:id_pelicula', function(req, res, next) {
     res.render('editar_pelicula', {title: 'Editar película', data: JSON.parse(body) });
   });
 });
-
-router.post('/id_pelicula',function (req, res, next) => {
-  var nombre = req.body.nombre;
-  var url = req.body.imagen;
-  var poder = req.body.poder;
-  var miComic = Comic(
-      {
-        nombre: nombre,
-        imagen: url,
-        poderes: poder
-      }
-  );
-  miComic.save((error, data) => {
-    if (error) res.send('Error al guardar los datos');
-    else res.render('index', data);
-  });
-});
+// 
+// router.post('/id_pelicula', (req, res, next) => {
+//   var nombre = req.body.nombre;
+//   var url = req.body.imagen;
+//   var poder = req.body.poder;
+//   var miComic = Comic(
+//       {
+//         nombre: nombre,
+//         imagen: url,
+//         poderes: poder
+//       }
+//   );
+//   miComic.save((error, data) => {
+//     if (error) res.send('Error al guardar los datos');
+//     else res.render('index', data);
+//   });
+// });
 
 module.exports = router;
