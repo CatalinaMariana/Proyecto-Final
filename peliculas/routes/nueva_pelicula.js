@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 
 
 //POST
-router.post('/cargar_pelicula', function(req, res, next) => {
+router.post('/cargar_pelicula', (req, res, next) => {
  var pelicula = Pelicula({
    name: req.body.name,
    year: req.body.year,
