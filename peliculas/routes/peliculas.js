@@ -36,13 +36,6 @@ router.post('/', (req, res, next) => {
   });
 });
 
-router.get('/', (req, res, next) => {
-  Pelicula.find({}, (error, data) => {
-    if (error) res.status(400).json({'mensaje': 'Se ha encontrado un error en api'})
-    else res.status(200).json(data);
-  });
-});
-
 router.patch('/:id_pelicula', (req, res, next) => {
   Pelicula.findOneAndUpdate({ _id: req.body.id_pelicula },
       {
