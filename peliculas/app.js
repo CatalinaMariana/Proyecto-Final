@@ -9,7 +9,7 @@ var indexRouter = require('./routes/index');
 var peliculasRouter = require('./routes/peliculas');
 var editarPeliculaRouter = require('./routes/editar_pelicula');
 var nuevaPeliculaRouter = require('./routes/nueva_pelicula');
-
+var eliminaPeliculaRouter = require('./routes/elimina_pelicula');
 
 var app = express();
 var mongoose = require('mongoose');
@@ -36,6 +36,7 @@ app.use('/', indexRouter);
 app.use('/peliculas', peliculasRouter);
 app.use('/editar', editarPeliculaRouter);
 app.use('/nueva', nuevaPeliculaRouter);
+app.use('/eliminar', eliminaPeliculaRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

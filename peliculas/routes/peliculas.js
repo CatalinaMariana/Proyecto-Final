@@ -22,7 +22,6 @@ router.get('/:id_pelicula', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  console.log(req.body);
   var pelicula = Pelicula({
     name:  req.body.name,
     year: req.body.year,
@@ -44,7 +43,7 @@ router.get('/', (req, res, next) => {
   });
 });
 
-router.post('/:id_pelicula', (req, res, next) => {
+router.patch('/:id_pelicula', (req, res, next) => {
   Pelicula.findOneAndUpdate({ _id: req.body.id_pelicula },
       {
         name: req.body.name,
@@ -56,6 +55,14 @@ router.post('/:id_pelicula', (req, res, next) => {
       }, (error, data) => {
       if (error) res.status(400).json({'mensaje': 'Se ha encontrado un error en api'})
       else res.status(200).json(req.body);
+  });
+});
+
+router.delete('/:id_pelicula', (req, res, next) => {
+  console.log(req.body);
+  Pelicula.findOneAndDelete({'_id': req.body.id_pelicula}, (error, data) => {
+    if (error) res.status(404).json(error);
+    else res.status(200).json(data);
   });
 });
 
