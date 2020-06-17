@@ -1,26 +1,24 @@
 ﻿var express = require('express');
 var router = express.Router();
+var Pelicula = require('../models/Film');
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('nueva_pelicula', { title: 'Nueva película' });
 });
 
-
-//POST
 router.post('/', (req, res, next) => {
  var pelicula = Pelicula({
-   id:  req.body.id,
    name:  req.body.name,
-   age: req.body.ag,
+   year: req.body.year,
+   gender: req.body.gender,
    director: req.body.director,
-   gender: req.body.genero
+   producer: req.body.producer,
+   url: req.body.url
  });
  pelicula.save( (error,data) => {
-   if (error) res.status(404).json({mensaje:'No se guardo correctamente'})
-   else res.status(201).json(data);
+   if (error) res.send('Se ha producido un error al guardar los datos.');
+   else res.render('editar_pelicula', {data: data, nueva_pelicula: true});
  });
-  //
 });
 
 router.post('/:peliculaId', (req, res, next) => {
@@ -35,8 +33,8 @@ router.delete('/:peliculaId', (req, res, next)=>{
   Pelicula.findOneAndDelete({_id:req.params.peliculaId}, (error, data)=>{
     if(error) res.status(404).json(error);
     else res.status(200).json(data);
-    });
   });
+});
 
 
 module.exports = router;
