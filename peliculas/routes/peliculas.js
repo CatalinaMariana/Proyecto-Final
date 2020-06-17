@@ -21,6 +21,37 @@ router.get('/:id_pelicula', (req, res, next) => {
   });
 });
 
+router.post('/', (req, res, next) => {
+  console.log(req.body);
+  var pelicula = Pelicula({
+    name:  req.body.name,
+    year: req.body.year,
+    gender: req.body.gender,
+    director: req.body.director,
+    producer: req.body.producer,
+    url: req.body.url
+  });
+  pelicula.save( (error,data) => {
+    if (error) res.send('Se ha producido un error al guardar los datos.');
+    else res.status(200).json(data);
+  });
+});
+
+router.get('/', (req, res, next) => {
+  Pelicula.find({}, (error, data) => {
+    if (error) res.status(400).json({'mensaje': 'Se ha encontrado un error en api'})
+    else res.status(200).json(data);
+  });
+});
+
+router.post('/:id_pelicula', (req, res, next) => {
+  Pelicula.findOneAndUpdate({ _id: req.body.id_pelicula },
+      { name: req.body.name }, (error, data) => {
+      if (error) res.status(400).json({'mensaje': 'Se ha encontrado un error en api'})
+      else res.status(200).json(req.body);
+  });
+});
+
 router.post('/:id_pelicula', (req, res, next) => {
   res.status(404).json({mensaje: 'No está permitida la acción'});
 });

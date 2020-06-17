@@ -1,32 +1,27 @@
 ﻿var express = require('express');
 var router = express.Router();
-var Pelicula = require('../models/Film');
+var request = require('request');
+
+// var Pelicula = require('../models/Film');
 
 router.get('/', function(req, res, next) {
   res.render('nueva_pelicula', { title: 'Nueva película' });
 });
 
 router.post('/', (req, res, next) => {
- var pelicula = Pelicula({
-   name:  req.body.name,
-   year: req.body.year,
-   gender: req.body.gender,
-   director: req.body.director,
-   producer: req.body.producer,
-   url: req.body.url
- });
- pelicula.save( (error,data) => {
-   if (error) res.send('Se ha producido un error al guardar los datos.');
-   else res.render('editar_pelicula', {data: data, nueva_pelicula: true});
- });
+  var url = req.protocol + '://' + req.get('host') + '/peliculas/';
+  request.post(url, {json: req.body}, (error, response, body) => {
+    if (error) res.send('Se ha producido un error al editar los datos.');
+    else res.render('editar_pelicula', {title: 'Pelicula guardada', data: body, pelicula: 'Se ha guardado la película correctamente'});
+  });
 });
 
 router.post('/:peliculaId', (req, res, next) => {
-  res.status(404).json({mensaje:"Esta operación no está permitida"});
+  res.render('no_permitido', { mensaje: "Esta accion no está permitida" });
 });
 
 router.delete('/', (req, res, next) => {
-  res.status(405).json({mensaje:"Esta accion no está permitida"});
+  res.render('no_permitido', { mensaje: "Esta accion no está permitida" });
 });
 
 router.delete('/:peliculaId', (req, res, next)=>{
