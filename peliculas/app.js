@@ -18,7 +18,7 @@ mongoose.connect('mongodb+srv://sisinfo2020:sisinfo.2020@cluster0-frd8n.mongodb.
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
-}).then(() => { console.log('Conectado')})
+}).then(() => {})
 .catch(error => console.log(error));
 
 // view engine setup

@@ -46,7 +46,14 @@ router.get('/', (req, res, next) => {
 
 router.post('/:id_pelicula', (req, res, next) => {
   Pelicula.findOneAndUpdate({ _id: req.body.id_pelicula },
-      { name: req.body.name }, (error, data) => {
+      {
+        name: req.body.name,
+        year: req.body.year,
+        gender: req.body.gender,
+        director: req.body.director,
+        producer: req.body.producer,
+        url: req.body.url
+      }, (error, data) => {
       if (error) res.status(400).json({'mensaje': 'Se ha encontrado un error en api'})
       else res.status(200).json(req.body);
   });
